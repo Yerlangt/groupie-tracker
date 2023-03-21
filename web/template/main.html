@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <link rel="icon" href="/image/bulb.png">
+    <title>GroupieTrack</title>
+</head>
+
+<body>
+    <div class="navigation-wrapper">
+        <div class="navigation-sticky">
+            <img class="logo" src="/image/spoty.png"><br>
+            <p class="header">GROUPIE TRACKER</p><br>
+            <form id="search" action="/search" method="POST">
+                <div class="search-bar">
+                    <input class="search-input" list="artist-search" type="search" id="search-detail" name="search"
+                        placeholder="Search...">
+                    <datalist id="artist-search">
+                        {{range .}}
+                        <option value="{{.Name}}">{{.Name}} - artist/band</option>
+                        <option value="{{.FirstAlbum}}">{{.FirstAlbum}} - first album release</option>
+                        <option value="{{.CreationDate}}">{{.CreationDate}} - creation date</option>
+                        {{range .Members}}
+                        <option value="{{.}}">{{.}} - member</option>
+                        {{end}}
+                        {{range $locations, $dates:= .Relationships}}
+                        <option value="{{$locations}}">{{$locations}}{{$dates}} - concert</option>
+                        {{end}}
+                        {{end}}
+                    </datalist>
+                </div>
+                <div class="btn">
+                    <button type="search" class="button">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="artists-list">
+        {{ range . }}
+        <div class="artist-image">
+            <a href="/artist/{{.Id}}">
+                <div class="image_wrapper">
+                    <!-- <div id = "loader"></div> -->
+                    <img src="/image/vinil.png" alt="vinyl" width="240" height="240" class="vinyl">
+                    <img src="{{.Image}}" alt="" width="205" height="205" class="image">
+                </div>
+                <div class="name">
+                    <span class="text">{{.Name}}</span>
+                </div>
+            </a>
+        </div>
+        {{end}}
+    </div>
+</body>
+
+</html>

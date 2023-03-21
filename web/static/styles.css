@@ -1,0 +1,311 @@
+* {
+    color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    margin: 0;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
+    /* margin-top: 20px; */
+    display: grid;
+    grid-template-columns: 280px auto;
+    background-color: rgb(51, 51, 51);
+}
+
+a {
+    text-decoration: none;
+}
+
+.navigation-wrapper {
+    max-width: 400px;
+    min-width: 250px;
+    /* flex-flow: column; */
+    border: 1px solid black;
+    background-color: black;
+}
+
+.navigation-sticky {
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    margin-top: 30px;
+    width: 150px;
+}
+
+.header {
+    text-align: center;
+    font-size: 1rem;
+    animation: color-change-groupie 3s infinite;
+    margin: 20px 0 20px 0
+}
+
+.artists-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 0 20px 0 20px;
+}
+
+.artist-image {
+    background-color: #171717;
+    min-width: 150px;
+    border: 1px solid #171717;
+    border-radius: 15px;
+    width: 240px;
+    height: 300px;
+    margin: 5px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+/* hover used when you mouse over them */
+.artist-image:hover {
+    background-color: #202020;
+    box-shadow: 0 0 0 4px rgb(209, 98, 204);
+    transition: 0.2s;
+}
+
+.artist-image:hover .text {
+    transition: 0.2s;
+    color: rgba(118, 207, 255, 0.797) !important;
+}
+
+.image_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vinyl {
+    z-index: 0;
+}
+
+.image {
+    z-index: 2;
+    position: absolute;
+}
+
+.image:hover {
+    opacity: 0.4;
+    transition: 1s;
+    border-radius: 50%;
+    animation: rotation 10s linear infinite;
+    /*run the rotation for 10s and iterate again*/
+    transform-origin: center;
+    /*rotate from the center*/
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.search-input {
+    color: black;
+    font-size: 15px;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.btn {
+    margin: 5px auto;
+    text-align: center;
+}
+
+.button {
+    align-items: center;
+    appearance: none;
+    background-color: rgba(245, 167, 255, 0.925);
+    border-radius: 6px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    height: 30px;
+    justify-content: center;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 100%;
+    overflow: visible;
+    padding: 2px 24px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1), opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    user-select: none;
+
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform, opacity;
+
+}
+
+.button:hover {
+    background: #F6F9FE;
+    color: #174ea6;
+}
+
+.button:active {
+    box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+    outline: none;
+}
+
+.button:focus {
+    outline: none;
+    border: 2px solid #4285f4;
+}
+
+.nothing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
+    margin-bottom: 10px;
+    padding: 20px;
+    min-height: 100%;
+}
+
+.nothing p {
+    animation: color-change-groupie 3s infinite;
+}
+
+@keyframes color-change-groupie {
+    0% {
+        color: rgb(214, 94, 223);
+    }
+
+    50% {
+        color: rgba(118, 207, 255, 0.797);
+    }
+
+    100% {
+        color: rgb(214, 94, 223);
+    }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+        /* start from 0 degree */
+    }
+
+    to {
+        transform: rotate(360deg)
+            /* end at 360 degree which the same as 0 degree to create the continuous loop*/
+    }
+}
+
+/*created loader with 3 colors*/
+#loader {
+    margin-left: 55px;
+    display: block;
+    z-index: 1000;
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #54b3f3;
+    animation:
+        spin 2s linear infinite,
+        /* Chrome, Firefox 16+, IE 10+, Opera */
+        hideAnimation 0s ease-in 1s;
+    z-index: 1002;
+    animation-fill-mode: forwards;
+}
+
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #e991dd;
+    animation:
+        spin 2.5s linear infinite,
+        hideAnimation 0s ease-in 1s;
+    animation-fill-mode: forwards;
+}
+
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #4e4c61;
+    animation:
+        spin 1.5is linear infinite,
+        hideAnimation 0s ease-in 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        transform: rotate(0deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(360deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+
+    to {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+    }
+}
+
+@keyframes hideAnimation {
+    to {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+    }
+}

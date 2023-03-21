@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <link rel="icon" href="/image/bulb.png">
+    <title>GroupieTrack</title>
+</head>
+
+<body>
+    <div class="navigation-wrapper">
+        <div class="navigation-sticky">
+            <a href="/"> 
+                <img class="logo" src="/image/spoty.png"> 
+            </a>
+            <a href="/">
+                <p class="header">GROUPIE TRACKER</p>
+            </a>
+            <form id="search" action="/search" method="POST">
+                <div class="search-bar">
+                    <input class="search-input" list="artist-search" type="search" id="search-detail" name="search"
+                        placeholder="Search...">
+                    <!-- when you make type search it is possible to add suggestion for options from the dataset by datalist-->
+                    <datalist id="artist-search">
+                        {{range .AllArtists}}
+                        <option value="{{.Name}}">{{.Name}} - artist/band</option>
+                        <option value="{{.FirstAlbum}}">{{.FirstAlbum}} - first album release</option>
+                        <option value="{{.CreationDate}}">{{.CreationDate}} - creation date</option>
+                        {{range .Members}}
+                        <option value="{{.}}">{{.}} - member</option>
+                        {{end}}
+                        {{range $locations, $dates:= .Relationships}}
+                        <option value="{{$locations}}">{{$locations}}{{$dates}} - concert</option>
+                        {{end}}
+                        {{end}}
+                    </datalist>
+                </div>
+                <div class="btn">
+                    <button type="search" class="button">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{ if .FoundArtists}}
+    <div class="artists-list">
+        {{ range .FoundArtists }}
+        <div class="artist-image">
+            <a href="/artist/{{.Id}}">
+                <div class="image_wrapper">
+                    <img src="/image/vinil.png" alt="vinyl" width="240" height="240" class="vinyl">
+                    <img src="{{.Image}}" alt="" width="205" height="205" class="image">
+                </div>
+                <div class="name">
+                    <span class="text">{{.Name}}</span>
+                </div>
+            </a>
+        </div>
+        {{end}}
+    </div>
+    {{else}}
+    <div class="nothing">
+        <p> Nothing Found, try another search</p>
+    </div>
+    {{end}}
+</body>
+
+</html>
